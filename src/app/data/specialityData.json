@@ -1,0 +1,26 @@
+[
+  {
+    "speciality": "General physician",
+    "image": "assets/images/General_physician.svg"
+  },
+  {
+    "speciality": "Gynecologist",
+    "image": "assets/images/Gynecologist.svg"
+  },
+  {
+    "speciality": "Dermatologist",
+    "image": "assets/images/Dermatologist.svg"
+  },
+  {
+    "speciality": "Pediatricians",
+    "image": "assets/images/Pediatricians.svg"
+  },
+  {
+    "speciality": "Neurologist",
+    "image": "assets/images/Neurologist.svg"
+  },
+  {
+    "speciality": "Gastroenterologist",
+    "image": "assets/images/Gastroenterologist.svg"
+  }
+]

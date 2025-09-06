@@ -1,16 +1,73 @@
-<header class="flex justify-between items-center px-8 py-4 shadow-sm bg-white">
-  <h1 class="text-2xl font-bold text-indigo-600">Prescripto</h1>
+<nav class="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-[#ADADAD]">
+  <!-- Logo -->
+  <img class="w-44 cursor-pointer" src="/assets/images/logo.svg" alt="Logo" />
 
-  <nav class="hidden md:flex gap-6">
-    <a routerLink="/" class="hover:text-indigo-600">Home</a>
-    <a href="#features" class="hover:text-indigo-600">Features</a>
-    <a href="#contact" class="hover:text-indigo-600">Contact</a>
-  </nav>
+  <!-- Desktop Menu -->
+  <ul class="md:flex items-start gap-5 font-medium hidden">
+    <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <li class="py-1">HOME</li>
+      <hr class="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
+    </a>
 
-  <a
-    routerLink="/auth/login"
-    class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
-  >
-    Get Started
-  </a>
-</header>
+    <a routerLink="/doctors" routerLinkActive="active">
+      <li class="py-1">ALL DOCTORS</li>
+      <hr class="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
+    </a>
+
+    <a routerLink="/about" routerLinkActive="active">
+      <li class="py-1">ABOUT</li>
+      <hr class="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
+    </a>
+
+    <a routerLink="/contact" routerLinkActive="active">
+      <li class="py-1">CONTACT</li>
+      <hr class="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
+    </a>
+  </ul>
+
+  <!-- Right section -->
+  <div class="flex items-center gap-4">
+    <button class="bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block">
+      Create account
+    </button>
+
+    <!-- Mobile menu icon -->
+    <img
+      class="w-6 md:hidden cursor-pointer"
+      src="data:image/svg+xml,%3csvg%20width='37'%20height='27'%20viewBox='0%200%2037%2027'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='17'%20y='24'%20width='20'%20height='3'%20rx='1.5'%20fill='%23000B6D'/%3e%3crect%20x='7'%20y='12'%20width='30'%20height='3'%20rx='1.5'%20fill='%23000B6D'/%3e%3crect%20width='37'%20height='3'%20rx='1.5'%20fill='%23000B6D'/%3e%3c/svg%3e"
+      alt="Menu"
+      (click)="toggleMenu()"
+    />
+
+    <!-- Mobile menu -->
+    <div
+      class="md:hidden fixed right-0 top-0 bottom-0 w-0 h-0 overflow-hidden bg-white z-20 transition-all"
+      [ngClass]="{ 'w-full h-full': isMenuOpen }"
+    >
+      <div class="flex items-center justify-between px-5 py-6">
+        <img src="assets/images/logo.svg" class="w-36" alt="Logo" />
+        <img
+          src="assets/images/logo.svg"
+          class="w-7 cursor-pointer"
+          alt="Close"
+          (click)="toggleMenu()"
+        />
+      </div>
+
+      <ul class="flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium">
+        <a routerLink="/" routerLinkActive="active">
+          <p class="px-4 py-2 rounded-full inline-block">HOME</p>
+        </a>
+        <a routerLink="/doctors" routerLinkActive="active">
+          <p class="px-4 py-2 rounded-full inline-block">ALL DOCTORS</p>
+        </a>
+        <a routerLink="/about" routerLinkActive="active">
+          <p class="px-4 py-2 rounded-full inline-block">ABOUT</p>
+        </a>
+        <a routerLink="/contact" routerLinkActive="active">
+          <p class="px-4 py-2 rounded-full inline-block">CONTACT</p>
+        </a>
+      </ul>
+    </div>
+  </div>
+</nav>
