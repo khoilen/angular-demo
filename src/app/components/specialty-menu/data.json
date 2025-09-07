@@ -1,26 +1,26 @@
 [
   {
-    "speciality": "General physician",
+    "specialty": "General physician",
     "image": "assets/images/General_physician.svg"
   },
   {
-    "speciality": "Gynecologist",
+    "specialty": "Gynecologist",
     "image": "assets/images/Gynecologist.svg"
   },
   {
-    "speciality": "Dermatologist",
+    "specialty": "Dermatologist",
     "image": "assets/images/Dermatologist.svg"
   },
   {
-    "speciality": "Pediatricians",
+    "specialty": "Pediatricians",
     "image": "assets/images/Pediatricians.svg"
   },
   {
-    "speciality": "Neurologist",
+    "specialty": "Neurologist",
     "image": "assets/images/Neurologist.svg"
   },
   {
-    "speciality": "Gastroenterologist",
+    "specialty": "Gastroenterologist",
     "image": "assets/images/Gastroenterologist.svg"
   }
 ]

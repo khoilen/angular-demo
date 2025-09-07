@@ -7,12 +7,12 @@
 
   <div class="flex sm:justify-center gap-4 pt-5 w-full overflow-scroll">
     <div
-      *ngFor="let item of specialities"
-      (click)="goToDoctor(item.speciality)"
+      *ngFor="let item of specialties"
+      (click)="goToDoctor(item.specialty)"
       class="flex flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:-translate-y-2.5 transition-all duration-500"
     >
-      <img class="w-16 sm:w-24 mb-2" [src]="item.image" [alt]="item.speciality" />
-      <p>{{ item.speciality }}</p>
+      <img class="w-16 sm:w-24 mb-2" [src]="item.image" [alt]="item.specialty" />
+      <p>{{ item.specialty }}</p>
     </div>
   </div>
 </div>
