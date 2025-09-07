@@ -4,22 +4,27 @@
 
   <!-- Desktop Menu -->
   <ul class="md:flex items-start gap-5 font-medium hidden">
-    <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ariaCurrentWhenActive="page"
+    >
       <li class="py-1">HOME</li>
       <hr class="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
     </a>
 
-    <a routerLink="/doctors" routerLinkActive="active">
+    <a routerLink="/doctors" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <li class="py-1">ALL DOCTORS</li>
       <hr class="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
     </a>
 
-    <a routerLink="/about" routerLinkActive="active">
+    <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <li class="py-1">ABOUT</li>
       <hr class="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
     </a>
 
-    <a routerLink="/contact" routerLinkActive="active">
+    <a routerLink="/contact" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <li class="py-1">CONTACT</li>
       <hr class="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
     </a>
