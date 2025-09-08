@@ -1,0 +1,59 @@
+<div>
+  <p class="text-gray-600">Browse through the doctors specialist.</p>
+
+  <div class="flex flex-col sm:flex-row items-start gap-5 mt-5">
+    <button
+      class="py-1 px-3 border rounded text-sm transition-all sm:hidden"
+      [ngClass]="{ 'bg-primary text-white': showFilter }"
+      (click)="toggleFilter()"
+    >
+      Filters
+    </button>
+
+    <div
+      class="flex-col gap-4 text-sm text-gray-600 sm:flex"
+      [ngClass]="{ flex: showFilter, hidden: !showFilter }"
+    >
+      <p
+        *ngFor="let spec of specialities"
+        (click)="navigateSpeciality(spec)"
+        class="w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer"
+        [ngClass]="{
+          'bg-indigo-100 text-black': speciality === spec
+        }"
+      >
+        {{ spec }}
+      </p>
+    </div>
+
+    <div class="w-full grid grid-cols-auto gap-4 gap-y-6">
+      <div
+        *ngFor="let item of filterDoctors"
+        (click)="goToAppointment(item._id)"
+        class="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-all duration-500"
+      >
+        <img class="bg-blue-50 w-full" [src]="item.image" alt="" />
+        <div class="p-4">
+          <div
+            class="flex items-center gap-2 text-sm text-center"
+            [ngClass]="{
+              'text-green-500': item.available,
+              'text-gray-500': !item.available
+            }"
+          >
+            <p
+              class="w-2 h-2 rounded-full"
+              [ngClass]="{
+                'bg-green-500': item.available,
+                'bg-gray-500': !item.available
+              }"
+            ></p>
+            <p>{{ item.available ? 'Available' : 'Not Available' }}</p>
+          </div>
+          <p class="text-gray-900 text-lg font-medium">{{ item.name }}</p>
+          <p class="text-gray-600 text-sm">{{ item.speciality }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

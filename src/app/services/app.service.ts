@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
+import { Doctor } from '../types/doctor';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class AppService {
   currencySymbol = '$';
   backendUrl = environment.apiUrl;
 
-  private doctorsSource = new BehaviorSubject<any[]>([]);
+  private doctorsSource = new BehaviorSubject<Doctor[]>([]);
   doctors$ = this.doctorsSource.asObservable();
 
   private userDataSource = new BehaviorSubject<any | null>(null);
