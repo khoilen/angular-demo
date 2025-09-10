@@ -4,6 +4,7 @@ import { Home } from './pages/home/home';
 import { About } from './pages/about/about';
 import { Contact } from './pages/contact/contact';
 import { Doctors } from './pages/doctors/doctors';
+import { Login } from './pages/login/login';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
       {
         path: 'doctors/:speciality',
         component: Doctors,
+      },
+      {
+        path: 'login',
+        component: Login,
       },
     ],
   },

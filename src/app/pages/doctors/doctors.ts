@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppService } from '../../services/app.service';
 import { Doctor as DoctorModel } from '../../types/doctor';
 import { DOCTOR_SPECIALITIES } from '../../constants/specialities';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-doctors',
@@ -13,7 +13,7 @@ import { DOCTOR_SPECIALITIES } from '../../constants/specialities';
 export class Doctors {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private appService = inject(AppService);
+  private doctorService = inject(DoctorService);
 
   doctors: DoctorModel[] = [];
   filterDoctors: DoctorModel[] = [];
@@ -22,7 +22,7 @@ export class Doctors {
   specialities = DOCTOR_SPECIALITIES;
 
   ngOnInit(): void {
-    this.appService.doctors$.subscribe((docs) => {
+    this.doctorService.doctors$.subscribe((docs) => {
       this.doctors = docs;
       this.applyFilter();
     });

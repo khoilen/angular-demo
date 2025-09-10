@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AppService } from '../../services/app.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DoctorService } from '../../services/doctor.service';
+import { Doctor } from '../../types/doctor';
 
 @Component({
   selector: 'app-top-doctors',
@@ -9,12 +10,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './top-doctors.html',
 })
 export class TopDoctors {
-  doctors: any[] = [];
+  doctors: Doctor[] = [];
 
-  constructor(private appService: AppService, private router: Router) {}
+  constructor(private doctorService: DoctorService, private router: Router) {}
 
   ngOnInit(): void {
-    this.appService.doctors$.subscribe((docs) => {
+    this.doctorService.doctors$.subscribe((docs) => {
       this.doctors = docs;
     });
   }
