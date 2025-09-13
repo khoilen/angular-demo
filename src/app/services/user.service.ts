@@ -102,6 +102,25 @@ export class UserService {
       .subscribe();
   }
 
+  async updateProfile(formData: FormData): Promise<ProfileResponse> {
+    const token = this.getToken();
+    if (!token) throw new Error('No token found');
+
+    const headers = new HttpHeaders({ token });
+
+    const res = await firstValueFrom(
+      this.http.post<ProfileResponse>(`${this.backendUrl}/api/user/update-profile`, formData, {
+        headers,
+      })
+    );
+
+    if (res.success) {
+      this.loadUserProfileData();
+    }
+
+    return res;
+  }
+
   getToken(): string | null {
     return this.tokenSource.value;
   }

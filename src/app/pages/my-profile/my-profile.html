@@ -1,0 +1,115 @@
+<div *ngIf="userData" class="max-w-lg flex flex-col gap-2 text-sm">
+  <!-- Avatar -->
+  <div *ngIf="isEdit; else viewImage">
+    <label for="image" class="inline-block relative cursor-pointer">
+      <img
+        class="w-36 rounded opacity-75"
+        [src]="image ? image : userData.image"
+        alt="Profile Image"
+      />
+      <img
+        *ngIf="!image"
+        class="w-10 absolute bottom-12 right-12"
+        src="assets/upload_icon.png"
+        alt="Upload Icon"
+      />
+    </label>
+    <input type="file" id="image" hidden (change)="onFileChange($event)" />
+  </div>
+  <ng-template #viewImage>
+    <img class="w-36 rounded" [src]="userData.image" alt="Profile Image" />
+  </ng-template>
+
+  <!-- Name -->
+  <div *ngIf="isEdit; else viewName">
+    <input
+      class="bg-gray-50 text-3xl font-medium max-w-60 mt-4"
+      type="text"
+      formControlName="name"
+    />
+  </div>
+  <ng-template #viewName>
+    <p class="font-medium text-3xl text-neutral-800 mt-4">
+      {{ userData.name }}
+    </p>
+  </ng-template>
+
+  <hr class="bg-zinc-400 h-[1px] border-none" />
+
+  <!-- Contact Information -->
+  <div>
+    <p class="text-neutral-500 underline mt-3">CONTACT INFORMATION</p>
+    <div class="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700">
+      <p class="font-medium">Email id:</p>
+      <p class="text-blue-500">{{ userData.email }}</p>
+
+      <p class="font-medium">Phone:</p>
+      <ng-container *ngIf="isEdit; else viewPhone">
+        <input class="bg-gray-100 max-w-52" type="text" formControlName="phone" />
+      </ng-container>
+      <ng-template #viewPhone>
+        <p class="text-blue-400">{{ userData.phone }}</p>
+      </ng-template>
+
+      <p class="font-medium">Address:</p>
+      <ng-container *ngIf="isEdit; else viewAddress">
+        <p>
+          <input class="bg-gray-50" type="text" formControlName="addressLine1" />
+          <br />
+          <input class="bg-gray-50" type="text" formControlName="addressLine2" />
+        </p>
+      </ng-container>
+      <ng-template #viewAddress>
+        <p *ngIf="userData.address" class="text-gray-500">
+          {{ userData.address.line1 }} <br />
+          {{ userData.address.line2 }}
+        </p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Basic Information -->
+  <div>
+    <p class="text-neutral-500 underline mt-3">BASIC INFORMATION</p>
+    <div class="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700">
+      <p class="font-medium">Gender:</p>
+      <ng-container *ngIf="isEdit; else viewGender">
+        <select class="max-w-20 bg-gray-100" formControlName="gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </ng-container>
+      <ng-template #viewGender>
+        <p class="text-gray-400">{{ userData.gender }}</p>
+      </ng-template>
+
+      <p class="font-medium">Birthday:</p>
+      <ng-container *ngIf="isEdit; else viewDob">
+        <input class="max-w-28 bg-gray-100" type="date" formControlName="dob" />
+      </ng-container>
+      <ng-template #viewDob>
+        <p class="text-gray-400">{{ userData.dob }}</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Action Button -->
+  <div class="mt-10">
+    <ng-container *ngIf="isEdit; else editButton">
+      <button
+        class="border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all"
+        (click)="updateUserProfileData()"
+      >
+        Save information
+      </button>
+    </ng-container>
+    <ng-template #editButton>
+      <button
+        class="border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all"
+        (click)="isEdit = true"
+      >
+        Edit
+      </button>
+    </ng-template>
+  </div>
+</div>

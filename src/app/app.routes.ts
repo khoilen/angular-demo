@@ -5,6 +5,7 @@ import { About } from './pages/about/about';
 import { Contact } from './pages/contact/contact';
 import { Doctors } from './pages/doctors/doctors';
 import { Login } from './pages/login/login';
+import { MyProfile } from './pages/my-profile/my-profile';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
       {
         path: 'login',
         component: Login,
+      },
+      {
+        path: 'my-profile',
+        component: MyProfile,
       },
     ],
   },
