@@ -6,6 +6,9 @@ import { Contact } from './pages/contact/contact';
 import { Doctors } from './pages/doctors/doctors';
 import { Login } from './pages/login/login';
 import { MyProfile } from './pages/my-profile/my-profile';
+import { Appointment } from './pages/appointment/appointment';
+import { MyAppointments } from './pages/my-appointments/my-appointments';
+import { UserAuthGuard } from './services/auth/user-auth.guard';
 
 export const routes: Routes = [
   {
@@ -30,6 +33,16 @@ export const routes: Routes = [
       {
         path: 'my-profile',
         component: MyProfile,
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'appointment/:docId',
+        component: Appointment,
+      },
+      {
+        path: 'my-appointments',
+        component: MyAppointments,
+        canActivate: [UserAuthGuard],
       },
     ],
   },

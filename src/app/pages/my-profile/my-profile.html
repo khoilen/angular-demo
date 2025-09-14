@@ -1,22 +1,5 @@
 <div *ngIf="userData" class="max-w-lg flex flex-col gap-2 text-sm">
   <form [formGroup]="profileForm">
-    <!-- Avatar -->
-    <div *ngIf="isEdit; else viewImage">
-      <label for="image" class="inline-block relative cursor-pointer">
-        <img
-          class="w-36 rounded opacity-75"
-          [src]="image ? image : userData.image"
-          alt="Profile Image"
-        />
-        <img
-          *ngIf="!image"
-          class="w-10 absolute bottom-12 right-12"
-          src="assets/upload_icon.png"
-          alt="Upload Icon"
-        />
-      </label>
-      <input type="file" id="image" hidden (change)="onFileChange($event)" />
-    </div>
     <ng-template #viewImage>
       <img class="w-36 rounded" [src]="userData.image" alt="Profile Image" />
     </ng-template>

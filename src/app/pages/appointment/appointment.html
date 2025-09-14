@@ -1,0 +1,78 @@
+<div *ngIf="docInfo">
+  <div class="flex flex-col sm:flex-row gap-4">
+    <div>
+      <img class="bg-primary w-full sm:max-w-72 rounded-lg" [src]="docInfo.image" alt="" />
+    </div>
+
+    <div
+      class="flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0"
+    >
+      <p class="flex items-center gap-2 text-2xl font-medium text-gray-900">
+        {{ docInfo.name }}
+        <img class="w-5" src="assets/images/verified_icon.svg" alt="" />
+      </p>
+      <div class="flex items-center gap-2 text-sm mt-1 text-gray-600">
+        <p>{{ docInfo.degree }} - {{ docInfo.speciality }}</p>
+        <button class="py-0.5 px-2 border text-xs rounded-full">
+          {{ docInfo.experience }}
+        </button>
+      </div>
+
+      <div>
+        <p class="flex items-center gap-1 text-sm font-medium text-gray-600 mt-3">
+          About <img [src]="'assets/images/info_icon.svg'" alt="" />
+        </p>
+        <p class="text-sm text-gray-500 max-w-[700px] mt-1">
+          {{ docInfo.about }}
+        </p>
+      </div>
+      <p class="text-gray-500 font-medium mt-4">
+        Appointment fee:
+        <span class="text-gray-600"> {{ currencySymbol }}{{ docInfo.fees }} </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
+    <p>Booking slots</p>
+    <div class="flex gap-3 items-center w-full overflow-x-scroll mt-4">
+      <div
+        *ngFor="let item of docSlots; let i = index"
+        (click)="slotIndex = i"
+        class="text-center py-6 min-w-16 rounded-full cursor-pointer"
+        [ngClass]="{
+          'bg-primary text-white': slotIndex === i,
+          'border border-gray-200': slotIndex !== i
+        }"
+      >
+        <p>{{ item[0].datetime | date : 'EEE' }}</p>
+        <p>{{ item[0].datetime | date : 'd' }}</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 w-full overflow-x-scroll mt-4">
+      <p
+        *ngFor="let item of docSlots[slotIndex]; let j = index"
+        (click)="slotTime = item.time"
+        class="text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer"
+        [ngClass]="{
+          'bg-primary text-white': item.time === slotTime,
+          'text-gray-400 border border-gray-300': item.time !== slotTime
+        }"
+      >
+        {{ item.time }}
+      </p>
+    </div>
+
+    <button
+      (click)="bookAppointment()"
+      class="bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6"
+    >
+      Book an appointment
+    </button>
+  </div>
+  <app-related-doctors
+    [speciality]="docInfo.speciality"
+    [docId]="docInfo._id"
+  ></app-related-doctors>
+</div>
