@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class Login {
   private router = inject(Router);
   private userService = inject(UserService);
   state = signal<'Sign Up' | 'Login'>('Sign Up');
+
+  constructor(private toast: ToastService) {}
 
   name = '';
   email = '';
@@ -40,10 +43,10 @@ export class Login {
       if (res.success) {
         this.router.navigate(['/']);
       } else {
-        alert(res.message);
+        this.toast.error(res.message || 'Something went wrong');
       }
     } catch (err: any) {
-      alert(err.message || 'Something went wrong');
+      this.toast.error(err.message || 'Something went wrong');
     }
   }
 }

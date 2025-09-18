@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ToastService, Toast } from '../../services/toast.service';
 import { CommonModule } from '@angular/common';
 
@@ -10,11 +10,5 @@ import { CommonModule } from '@angular/common';
 export class ToastContainer {
   toasts: Toast[] = [];
 
-  constructor(private toastService: ToastService) {
-    this.toastService.toasts$.subscribe((toasts) => (this.toasts = toasts));
-  }
-
-  dismiss(id: number) {
-    this.toastService.dismiss(id);
-  }
+  constructor(public toastService: ToastService) {}
 }
