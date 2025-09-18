@@ -1,23 +1,22 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { ToastService } from '../../services/toast.service';
+import { Button } from '../../components/button/button';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, Button],
   templateUrl: './login.html',
 })
 export class Login {
-  private http = inject(HttpClient);
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private userService = inject(UserService);
   state = signal<'Sign Up' | 'Login'>('Sign Up');
 
+  isLoading = signal(false);
   constructor(private toast: ToastService) {}
 
   name = '';
@@ -31,6 +30,7 @@ export class Login {
   }
   async onSubmitHandler(event: Event) {
     event.preventDefault();
+    this.isLoading.set(true);
 
     try {
       let res;
@@ -47,6 +47,8 @@ export class Login {
       }
     } catch (err: any) {
       this.toast.error(err.message || 'Something went wrong');
+    } finally {
+      this.isLoading.set(false);
     }
   }
 }

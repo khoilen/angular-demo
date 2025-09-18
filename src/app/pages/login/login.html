@@ -39,10 +39,16 @@
         required
       />
     </div>
-
-    <button type="submit" class="bg-primary text-white w-full py-2 rounded-md text-base">
+    <app-button
+      type="submit"
+      variant="primary"
+      class="w-full"
+      [fullWidth]="true"
+      (click)="onSubmitHandler($event)"
+      [loading]="isLoading()"
+    >
       {{ state() === 'Sign Up' ? 'Create Account' : 'Login' }}
-    </button>
+    </app-button>
 
     <p *ngIf="state() === 'Sign Up'; else loginBlock">
       Already have an account?
