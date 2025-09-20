@@ -64,12 +64,9 @@
       </p>
     </div>
 
-    <button
-      (click)="bookAppointment()"
-      class="bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6"
-    >
+    <app-button (click)="bookAppointment()" [loading]="isLoading()" class="px-14 py-3">
       Book an appointment
-    </button>
+    </app-button>
   </div>
   <app-related-doctors
     [speciality]="docInfo.speciality"

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
 import { UserService } from '../../services/user.service';
@@ -9,10 +9,11 @@ import { CommonModule } from '@angular/common';
 import { DAY_OF_WEEK } from '../../constants/time';
 import { TimeSlot } from '../../types/time-slot';
 import { RelatedDoctors } from '../../components/related-doctors/related-doctors';
+import { Button } from '../../components/button/button';
 
 @Component({
   selector: 'app-appointment',
-  imports: [CommonModule, RelatedDoctors],
+  imports: [CommonModule, RelatedDoctors, Button],
   templateUrl: './appointment.html',
 })
 export class Appointment implements OnInit {
@@ -22,6 +23,7 @@ export class Appointment implements OnInit {
   slotIndex = 0;
   slotTime = '';
   daysOfWeek = DAY_OF_WEEK;
+  isLoading = signal(false);
 
   currencySymbol = '$';
   token: string | null = null;
@@ -57,7 +59,7 @@ export class Appointment implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
+    this.isLoading.set(true);
     const date = this.docSlots[this.slotIndex][0].datetime;
     const slotDate = `${date.getDate()}_${date.getMonth() + 1}_${date.getFullYear()}`;
 
@@ -77,6 +79,9 @@ export class Appointment implements OnInit {
         },
         error: (err) => {
           this.toast.error(err.message || 'Something went wrong');
+        },
+        complete: () => {
+          this.isLoading.set(false);
         },
       });
   }

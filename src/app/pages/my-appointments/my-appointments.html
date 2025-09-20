@@ -25,27 +25,21 @@
       </div>
 
       <div class="flex flex-col gap-2 justify-end">
-        <button
-          *ngIf="!item.cancelled && !item.isCompleted"
-          class="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300"
-        >
-          Pay Online
-        </button>
-
-        <button
+        <app-button
           *ngIf="!item.cancelled && !item.isCompleted"
           (click)="cancelAppointment(item._id)"
-          class="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300"
+          variant="danger"
+          [loading]="isLoadingCancel()"
         >
           Cancel appointment
-        </button>
+        </app-button>
 
-        <button
+        <span
           *ngIf="item.cancelled && !item.isCompleted"
-          class="sm:min-w-48 py-2 border border-red-500 rounded text-red-500"
+          class="sm:min-w-48 py-2 border border-red-500 rounded text-red-500 text-center"
         >
           Appointment cancelled
-        </button>
+        </span>
 
         <button
           *ngIf="item.isCompleted"

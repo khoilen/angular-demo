@@ -1,19 +1,21 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { AppointmentService } from '../../services/appointment.service';
 import { DoctorService } from '../../services/doctor.service';
 import { MONTHS } from '../../constants/time';
 import { UserService } from '../../services/user.service';
 import { Appointment } from '../../types/appointment';
 import { CommonModule } from '@angular/common';
+import { Button } from '../../components/button/button';
 
 @Component({
   selector: 'app-my-appointments',
-  imports: [CommonModule],
+  imports: [CommonModule, Button],
   templateUrl: './my-appointments.html',
 })
 export class MyAppointments implements OnInit {
   appointments: Appointment[] = [];
   months = MONTHS;
+  isLoadingCancel = signal(false);
 
   constructor(
     private appointmentService: AppointmentService,
@@ -40,8 +42,10 @@ export class MyAppointments implements OnInit {
 
   cancelAppointment(id: string) {
     const token = this.userService.getToken()!;
+    this.isLoadingCancel.set(true);
     this.appointmentService.cancelAppointment(token, id).subscribe(() => {
       this.doctorService.getDoctorsData();
+      this.isLoadingCancel.set(false);
     });
   }
 }

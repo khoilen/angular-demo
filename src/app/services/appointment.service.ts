@@ -68,7 +68,7 @@ export class AppointmentService {
       docSlots.push(timeSlots);
     }
 
-    return docSlots;
+    return docSlots.filter((slots) => slots.length > 0);
   }
 
   bookAppointment(

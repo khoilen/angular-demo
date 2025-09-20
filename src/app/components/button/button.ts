@@ -14,17 +14,31 @@ export class Button {
   @Input() fullWidth = false;
   @Input() disabled = false;
   @Input() loading = false;
+  @Input() class = '';
+  @Input() outline = false; // ✅ new prop
 
   get classes() {
     const base =
-      'py-2 rounded-md text-base font-medium transition-all flex align-center justify-center gap-3 disabled:opacity-80 disabled:cursor-not-allowed';
+      'py-2 px-2 rounded-md text-base font-medium cursor-pointer transition-all flex items-center justify-center gap-3 disabled:opacity-80 disabled:cursor-not-allowed';
     const width = this.fullWidth ? 'w-full' : 'inline-block';
-    const color = {
-      primary: 'bg-primary text-white hover:bg-primary-dark',
-      secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
-      danger: 'bg-red-500 text-white hover:bg-red-600',
-    }[this.variant];
 
-    return [base, width, color].join(' ');
+    let color = '';
+    if (this.outline) {
+      const outlineStyles = {
+        primary: 'border border-primary text-primary hover:bg-primary hover:text-white',
+        secondary: 'border border-gray-400 text-gray-800 hover:bg-gray-100',
+        danger: 'border border-red-500 text-red-500 hover:bg-red-50',
+      };
+      color = outlineStyles[this.variant];
+    } else {
+      const fillStyles = {
+        primary: 'bg-primary text-white hover:bg-primary-dark',
+        secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
+        danger: 'bg-red-500 text-white hover:bg-red-600',
+      };
+      color = fillStyles[this.variant];
+    }
+
+    return [base, width, color, this.class].join(' ');
   }
 }
